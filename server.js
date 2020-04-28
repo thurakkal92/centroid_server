@@ -3,9 +3,10 @@ var nodemailer = require('nodemailer');
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express();
+const PORT = process.env.PORT || 3000
 
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true}))
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.post('/sendemail', sendEmail);
 
@@ -34,14 +35,14 @@ function sendEmail(req, res) {
       console.log('Email sent: ' + info.response);
       res.json({ status: 200, message: 'Email sent' }).status(200)
     }
-    
+
   });
 }
 app.get('/', function (req, res) { res.send('hello world') })
 
-app.listen(8080)
-
-
+app.listen(PORT, () => {
+  console.log("server started")
+})
 
 
 
